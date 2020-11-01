@@ -25,7 +25,7 @@ namespace Learn.Models
         [Column("descricao")]
         public string Descricao { get; set; }
 
-        public ICollection<ProdutoCategoria> ProdutoCategorias { get; set; }
+        public ICollection<Produto> Produtos { get; set; }
 
     }
 }

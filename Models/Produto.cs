@@ -38,7 +38,11 @@ namespace Learn.Models
         [Required(AllowEmptyStrings = true)]
         [Column("marca")]
         public decimal Marca { get; set; }
-     
-        public ICollection<ProdutoCategoria> ProdutoCategorias { get; set; }
+
+        [Column("cat_id")]
+        public int CategoriaId { get; set; }
+        
+        [ForeignKey("CategoriaId")]
+        public Categoria Categoria { get; set; }
     }
 }
