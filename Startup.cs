@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Learn.Models.Database;
+using Learn.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,7 +27,10 @@ namespace Learn
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
- 
+
+            services.AddTransient<ProdutoRepository>();
+            services.AddTransient<CategoriaRepository>();
+            
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<MyDbContext>(option =>
                  option.UseNpgsql(
