@@ -12,7 +12,6 @@ namespace Learn.Repositories
     public class ProdutoRepository
     {
         private readonly MyDbContext _db;
-        private readonly CategoriaRepository _categoriaRepository;
 
         public ProdutoRepository(MyDbContext db)
         {
@@ -40,7 +39,8 @@ namespace Learn.Repositories
                 Nome = produto.Nome,
                 Descricao = produto.Descricao,
                 Valor = produto.Valor,
-                Marca = produto.Marca
+                Marca = produto.Marca,
+                CategoriaId = produto.CategoriaId
             };
 
             try
@@ -63,6 +63,7 @@ namespace Learn.Repositories
             produto.Descricao = atualizaProduto.Descricao;
             produto.Valor = atualizaProduto.Valor;
             produto.Marca = atualizaProduto.Marca;
+            produto.CategoriaId = atualizaProduto.CategoriaId;
 
             try
             {
