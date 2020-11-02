@@ -24,10 +24,9 @@ namespace Learn.Repositories
                         .FirstOrDefaultAsync();
         }
 
-        public async Task<List<Produto>> PegaProdutosAsync(int[] ids)
+        public async Task<List<Produto>> PegaProdutosAsync()
         {
             return await _db.Produtos
-                        .Where(p => ids.Contains(p.ProdutoId))
                         .ToListAsync();
         }
 

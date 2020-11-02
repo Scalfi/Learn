@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Learn.Models;
+using Learn.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,24 +14,44 @@ namespace Learn.Controllers.APIsController
     [ApiController]
     public class APIProdutoController : ControllerBase
     {
+        private readonly ProdutoRepository _produtoRepository;
+
+        public APIProdutoController(ProdutoRepository produtoRepository)
+        {
+            _produtoRepository = produtoRepository;
+        }
+
         // GET: api/<APIProdutoController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok( await _produtoRepository.PegaProdutosAsync());
         }
 
         // GET api/<APIProdutoController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            
+            return Ok(await _produtoRepository.PegaProdutoAsync(id));
         }
 
         // POST api/<APIProdutoController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] Produto produto)
         {
+
+            if(ModelState.IsValid)
+            {
+                produto =  await _produtoRepository.CriaProdutoAsync(produto);
+
+                if (produto != null)
+                {
+                    return Ok(produto);
+                }
+                return BadRequest();
+            }
+            return BadRequest(ModelState);
         }
 
         // PUT api/<APIProdutoController>/5
