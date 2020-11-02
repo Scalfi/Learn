@@ -12,7 +12,7 @@ namespace Learn.Controllers.APIsController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class APIProdutoController : ControllerBase
+    public class APIProdutoController : BaseController
     {
         private readonly ProdutoRepository _produtoRepository;
 
@@ -49,21 +49,52 @@ namespace Learn.Controllers.APIsController
                 {
                     return Ok(produto);
                 }
-                return BadRequest();
+                return InternalServerError();
             }
             return BadRequest(ModelState);
         }
 
         // PUT api/<APIProdutoController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] Produto autualizarProduto)
         {
+            if (ModelState.IsValid)
+            {
+                var produto = await _produtoRepository.PegaProdutoAsync(id);
+
+                if (produto == null)
+                    return BadRequest($"Produto {id} não encontrado para ser atualizado");
+
+                produto = await _produtoRepository.AtualizaProdutoAsync( autualizarProduto, produto);
+
+                if (produto != null)
+                {
+                    return Ok(produto);
+                }
+
+                return InternalServerError();
+            }
+            return BadRequest(ModelState);
         }
 
         // DELETE api/<APIProdutoController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var produto = await _produtoRepository.PegaProdutoAsync(id);
+
+            if (produto == null)
+                return BadRequest($"Produto {id} não encontrado para ser deletado");
+
+            var sucesso = await _produtoRepository.DeletaProdutoAsync(produto);
+
+            if (sucesso)
+            {
+                return Ok($"Produto {id} foi deletado com sucesso!");
+            }
+            
+            return InternalServerError();    
+           
         }
     }
 }

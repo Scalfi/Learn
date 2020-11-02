@@ -79,19 +79,19 @@ namespace Learn.Repositories
         }
 
 
-        public async Task<Produto> DeletaProdutoAsync(Produto produto)
+        public async Task<bool> DeletaProdutoAsync(Produto produto)
         {
  
             try
             {
                  _db.Remove(produto);
                 await _db.SaveChangesAsync();
-                return produto;
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return null;
+                return false;
             }
 
         }
