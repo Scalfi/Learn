@@ -24,10 +24,9 @@ namespace Learn.Repositories
                         .FirstOrDefaultAsync();
         }
 
-        public async Task<List<Categoria>> PegaCategoriasAsync(int[] ids)
+        public async Task<List<Categoria>> PegaCategoriasAsync()
         {
             return await _db.Categorias
-                        .Where(p => ids.Contains(p.CategoriaId))
                         .ToListAsync();
         }
 
@@ -75,19 +74,19 @@ namespace Learn.Repositories
         }
 
 
-        public async Task<Categoria> DeletaCategoriaAsync(Categoria Categoria)
+        public async Task<bool> DeletaCategoriaAsync(Categoria Categoria)
         {
 
             try
             {
                 _db.Remove(Categoria);
                 await _db.SaveChangesAsync();
-                return Categoria;
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return null;
+                return false;
             }
 
         }
