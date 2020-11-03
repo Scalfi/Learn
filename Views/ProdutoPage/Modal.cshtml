@@ -1,0 +1,43 @@
+﻿@{
+    var produto = (Produto)ViewData["produto"];
+    var categorias = (List<Categoria>)ViewData["categorias"];
+}
+<div class="modal fade modal-lg" id="modalProdutoForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body row">
+                <div class="form-goup col-sm-12 col-md-4 col-lg-4">
+                    <input type="text" name="Nome" class="form-control-sm" value="@produto?.Nome" />
+                </div>
+                <div class="form-goup col-sm-12 col-md-4 col-lg-4">
+                    <input type="text" name="Value" class="form-control-sm" value="@produto?.Valor" />
+                </div>
+                <div class="form-goup col-sm-12 col-md-4 col-lg-4">
+                    <input type="text" name="Marca" class="form-control-sm" value="@produto?.Marca" />
+                </div>
+                <div class="form-goup col-sm-12 col-md-4 col-lg-4">
+                    <select>
+                        @foreach (var categoria in categorias )
+                        {
+                            <option value="@categoria.CategoriaId">@categoria.Nome</option>
+
+                        }
+                    </select>
+                </div>
+                <div class="form-goup col-12">
+                    <textarea class="form-control-sm" rows="5" name="Descricao">@produto?.Descricao</textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
