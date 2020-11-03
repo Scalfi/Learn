@@ -15,5 +15,10 @@ namespace Learn.Controllers.PagesController
         {
             return View();
         }
+
+        public IActionResult ModalProduto()
+        {
+            return View();
+        }
     }
 }

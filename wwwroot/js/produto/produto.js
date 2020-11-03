@@ -4,4 +4,11 @@
     });
 
     new $.fn.dataTable.FixedHeader(table);
+
+
+    $("#criaProduto").click(function () {
+        $.ajax({
+            
+        });
+    });
 });
