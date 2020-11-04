@@ -29,10 +29,12 @@ namespace Learn.Controllers.PagesController
         [HttpGet("{id}")]
         public async Task<IActionResult> Modal(int id)
         {
-             var model = new FrontProdutoCategoria();
+             var model = new FrontModalProdutoCategoria();
 
             if (id > 0)
-                model.Produto  = await _produtoRepository.PegaProdutoAsync(id);
+            {
+                model.Produto = await _produtoRepository.PegaProdutoAsync(id);
+            }
 
             model.Categorias = await  _categoriaRepository.PegaCategoriasAsync();
 

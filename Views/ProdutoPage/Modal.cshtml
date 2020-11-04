@@ -1,16 +1,17 @@
-﻿@model Learn.Models.FrontEnd.FrontProdutoCategoria
+﻿@model Learn.Models.FrontEnd.FrontModalProdutoCategoria
 @{
+    Layout = "_Layout2";
 }
-<div class="modal fade" id="modalProdutoForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form>
+<form method="post" action="api/produto" id="formProduto" class="formProduto">
+    <div class="modal fade" id="modalProdutoForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="modal-body ">
                     <div class="form-row">
 
@@ -20,7 +21,7 @@
                         </div>
                         <div class="form-group col-sm-12 col-md-6 col-lg-6">
                             <label>Valor</label>
-                            <input type="text" name="Value" class="form-control" value="@Model.Produto?.Valor">
+                            <input type="text" name="Value" id="valor" class="form-control" value="@Model.Produto?.Valor">
                         </div>
                         <div class="form-group col-sm-12 col-md-6 col-lg-6">
                             <label>Marca</label>
@@ -28,8 +29,8 @@
                         </div>
                         <div class="form-group col-sm-12 col-md-6 col-lg-6">
                             <label>Categoria</label>
-                            <select class="form-control" name="Categoria">
-                                <option value="">Escolha.</option>
+                            <select class="form-control" name="CategoriaId">
+                                <option value="null">Escolha.</option>
                                 @foreach (var categoria in Model.Categorias)
                                 {
                                     <option value="@categoria.CategoriaId">@categoria.Nome</option>
@@ -43,12 +44,13 @@
                         </div>
                     </div>
                 </div>
-            </form>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="modal-footer form-row">
+                    <div class="form-group col-12">
+                        <button type="button" class="btn btn-sm btn-danger float-left" data-dismiss="modal"><i class="fas fa-window-close"></i></button>
+                        <button type="button" class="btn btn-sm btn-success float-right enviaProduto"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>

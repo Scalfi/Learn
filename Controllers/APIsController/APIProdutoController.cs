@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Learn.Controllers.APIsController
 {
-    [Route("api/[controller]")]
+    [Route("api/produto")]
     [ApiController]
     public class APIProdutoController : BaseController
     {
@@ -38,7 +38,7 @@ namespace Learn.Controllers.APIsController
 
         // POST api/<APIProdutoController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Produto produto)
+        public async Task<IActionResult> Post([FromForm] Produto produto)
         {
 
             if(ModelState.IsValid)
@@ -56,7 +56,7 @@ namespace Learn.Controllers.APIsController
 
         // PUT api/<APIProdutoController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Produto autualizarProduto)
+        public async Task<IActionResult> Put(int id, [FromForm] Produto autualizarProduto)
         {
             if (ModelState.IsValid)
             {

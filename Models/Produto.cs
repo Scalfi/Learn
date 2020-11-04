@@ -37,7 +37,7 @@ namespace Learn.Models
         [DefaultValue("")]
         [Required(AllowEmptyStrings = true)]
         [Column("marca")]
-        public decimal Marca { get; set; }
+        public string Marca { get; set; }
 
         [Column("cat_id")]
         public int CategoriaId { get; set; }
