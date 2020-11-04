@@ -81,7 +81,7 @@
                 data: $("#formCategoria").serialize()
             }).done(function (data) {
                 swal({
-                    title: "Categoria "+ data.Nome + "!" ,
+                    title: "Categoria "+ data.nome + "!" ,
                     text: "Adicionado com sucesso!",
                     icon: "success",
                     button: "Ok!",
