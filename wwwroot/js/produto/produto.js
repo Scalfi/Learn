@@ -12,6 +12,41 @@
     $(".editar").click(function () {
         chamaModal($(this).data('id'));
     });
+
+    $(".remover").click(function () {
+        swal({
+            title: "Voçê tem certeza que deseja remover esse produto?",
+            text: $(this).data('nome'),
+            icon: "warning",
+            buttons: true,
+        }).then((botao) => {
+            console.log(botao)
+            if (botao) {
+                $.ajax({
+                    url: "/api/produto/" + $(this).data('id'),
+                    method: "DELETE",
+                }).done(function (data) {
+                    swal({
+                        title: "Produto!",
+                        text: "Deletado com sucesso!",
+                        icon: "success",
+                        button: "Ok!",
+                    }).then((data) => {
+                        location.reload();
+                    });
+
+                }).fail(function (error) {
+                    swal({
+                        title: "Ocorreu um erro interno, Por favor tente novamente",
+                        text: error.errors,
+                        icon: "error",
+                        button: "Ok!",
+                    });
+                })
+            }
+        });
+
+    });
     function chamaModal(id) {
         $.ajax({
             url: "/Produto/"+id,
@@ -51,7 +86,7 @@
                 });
             }).fail(function (error) {
                 swal({
-                    title: "Ocorreu Um erro interno",
+                    title: "Ocorreu um erro interno, Por favor tente novamente",
                     text: error.errors,
                     icon: "error",
                     button: "Ok!",
