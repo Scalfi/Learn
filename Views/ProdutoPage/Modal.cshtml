@@ -30,7 +30,7 @@
                         <div class="form-group col-sm-12 col-md-6 col-lg-6">
                             <label>Categoria</label>
                             <select class="form-control" name="CategoriaId">
-                                <option value="null">Escolha.</option>
+                                <option value="">Escolha.</option>
                                 @foreach (var categoria in Model.Categorias)
                                 {
                                     <option value="@categoria.CategoriaId">@categoria.Nome</option>
