@@ -1,8 +1,8 @@
 ﻿@model Learn.Models.FrontEnd.FrontProdutoCategoria
 @{
 }
-<div class="modal fade modal-lg" id="modalProdutoForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="modalProdutoForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -10,29 +10,41 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body row">
-                <div class="form-goup col-sm-12 col-md-4 col-lg-4">
-                    <input type="text" name="Nome" class="form-control-sm" value=" @Model.Produto?.Nome " />
-                </div>
-                <div class="form-goup col-sm-12 col-md-4 col-lg-4">
-                    <input type="text" name="Value" class="form-control-sm" value="@Model.Produto?.Valor" />
-                </div>
-                <div class="form-goup col-sm-12 col-md-4 col-lg-4">
-                    <input type="text" name="Marca" class="form-control-sm" value="@Model.Produto?.Marca" />
-                </div>
-                <div class="form-goup col-sm-12 col-md-4 col-lg-4">
-                    <select>
-                        @foreach (var categoria in Model.Categorias )
-                        {
-                            <option value="@categoria.CategoriaId">@categoria.Nome</option>
+            <form>
+                <div class="modal-body ">
+                    <div class="form-row">
 
-                        }
-                    </select>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" name="Nome" class="form-control" value=" @Model.Produto?.Nome ">
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label>Valor</label>
+                            <input type="text" name="Value" class="form-control" value="@Model.Produto?.Valor">
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label>Marca</label>
+                            <input type="text" name="Marca" class="form-control" value="@Model.Produto?.Marca">
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label>Categoria</label>
+                            <select class="form-control" name="Categoria">
+                                <option value="">Escolha.</option>
+                                @foreach (var categoria in Model.Categorias)
+                                {
+                                    <option value="@categoria.CategoriaId">@categoria.Nome</option>
+
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-12">
+                            <label>Descrição</label>
+                            <textarea class="form-control" rows="5" name="Descricao">@Model.Produto?.Descricao</textarea>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-goup col-12">
-                    <textarea class="form-control-sm" rows="5" name="Descricao">@Model.Produto?.Descricao</textarea>
-                </div>
-            </div>
+            </form>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
