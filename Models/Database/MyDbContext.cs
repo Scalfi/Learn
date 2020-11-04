@@ -16,6 +16,10 @@ namespace Learn.Models.Database
             modelBuilder.Entity<Produto>()
                 .HasOne(p => p.Categoria)
                 .WithMany(c => c.Produtos);
+
+            modelBuilder.Entity<Categoria>()
+                .HasMany(c => c.Produtos)
+                .WithOne(p => p.Categoria);
         }
     }
 }

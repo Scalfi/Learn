@@ -40,7 +40,7 @@ namespace Learn.Models
         public string Marca { get; set; }
 
         [Column("cat_id")]
-        public int CategoriaId { get; set; }
+        public int? CategoriaId { get; set; }
         
         [ForeignKey("CategoriaId")]
         public Categoria Categoria { get; set; }
