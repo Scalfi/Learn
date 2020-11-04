@@ -1,6 +1,5 @@
-﻿@{
-    var produto = (Produto)ViewData["produto"];
-    var categorias = (List<Categoria>)ViewData["categorias"];
+﻿@model Learn.Models.FrontEnd.FrontProdutoCategoria
+@{
 }
 <div class="modal fade modal-lg" id="modalProdutoForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -13,17 +12,17 @@
             </div>
             <div class="modal-body row">
                 <div class="form-goup col-sm-12 col-md-4 col-lg-4">
-                    <input type="text" name="Nome" class="form-control-sm" value="@produto?.Nome" />
+                    <input type="text" name="Nome" class="form-control-sm" value=" @Model.Produto?.Nome " />
                 </div>
                 <div class="form-goup col-sm-12 col-md-4 col-lg-4">
-                    <input type="text" name="Value" class="form-control-sm" value="@produto?.Valor" />
+                    <input type="text" name="Value" class="form-control-sm" value="@Model.Produto?.Valor" />
                 </div>
                 <div class="form-goup col-sm-12 col-md-4 col-lg-4">
-                    <input type="text" name="Marca" class="form-control-sm" value="@produto?.Marca" />
+                    <input type="text" name="Marca" class="form-control-sm" value="@Model.Produto?.Marca" />
                 </div>
                 <div class="form-goup col-sm-12 col-md-4 col-lg-4">
                     <select>
-                        @foreach (var categoria in categorias )
+                        @foreach (var categoria in Model.Categorias )
                         {
                             <option value="@categoria.CategoriaId">@categoria.Nome</option>
 
@@ -31,7 +30,7 @@
                     </select>
                 </div>
                 <div class="form-goup col-12">
-                    <textarea class="form-control-sm" rows="5" name="Descricao">@produto?.Descricao</textarea>
+                    <textarea class="form-control-sm" rows="5" name="Descricao">@Model.Produto?.Descricao</textarea>
                 </div>
             </div>
             <div class="modal-footer">

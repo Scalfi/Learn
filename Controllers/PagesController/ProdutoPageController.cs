@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Learn.Models.FrontEnd;
 using Learn.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,12 +29,14 @@ namespace Learn.Controllers.PagesController
         [HttpGet("{id}")]
         public async Task<IActionResult> Modal(int id)
         {
-            if( id > 0 )
-                ViewData["produto"] = await _produtoRepository.PegaProdutoAsync(id);
+             var model = new FrontProdutoCategoria();
 
-            ViewData["categorias"] = await  _categoriaRepository.PegaCategoriasAsync();
+            if (id > 0)
+                model.Produto  = await _produtoRepository.PegaProdutoAsync(id);
 
-            return View();
+            model.Categorias = await  _categoriaRepository.PegaCategoriasAsync();
+
+            return View(model);
         }
     }
 }
