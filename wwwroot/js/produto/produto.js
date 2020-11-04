@@ -25,7 +25,10 @@
     });
 
     function submitProduto() {
+
         $("form").on("click", ".enviaProduto", function () {
+            $('body').LoadingOverlay("show");
+
             $.ajax({
                 url: "/api/produto",
                 method: "post",
@@ -39,9 +42,16 @@
                     button: "Ok!",
                 });
             }).fail(function (error) {
-                console.log(error)
-                alert("Data Saved: " + error);
+                swal({
+                    title: "Não foi possivel adicionar o produto",
+                    text: error.errors,
+                    icon: "error",
+                    button: "Ok!",
+                });
+            }).always(function () {
+                $('body').LoadingOverlay("hide");
             })
         });
+
     }
 });
