@@ -27,6 +27,7 @@ namespace Learn.Repositories
         public async Task<List<Produto>> PegaProdutosAsync()
         {
             return await _db.Produtos
+                        .Include(p => p.Categoria)
                         .ToListAsync();
         }
 

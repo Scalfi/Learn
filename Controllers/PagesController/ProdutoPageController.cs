@@ -32,6 +32,7 @@ namespace Learn.Controllers.PagesController
         {
             var model = new FrontModalProdutoCategoria();
             
+            model.Url = "/api/produto";
 
             if (id > 0)
             {

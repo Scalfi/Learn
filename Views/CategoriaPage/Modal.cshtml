@@ -1,0 +1,37 @@
+﻿@model Learn.Models.FrontEnd.FrontModalProdutoCategoria
+@{
+    Layout = "_Layout2";
+}
+<form method="@Model.Method" action="@Model.Url" id="formCategoria" class="formCategoria">
+    <div class="modal fade" id="modalCategoriaForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="form-row">
+
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" name="Nome" class="form-control" value=" @Model.Categoria?.Nome ">
+                        </div>
+                        <div class="form-group col-12">
+                            <label>Descrição</label>
+                            <textarea class="form-control" rows="5" name="Descricao">@Model.Categoria?.Descricao</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer form-row">
+                    <div class="form-group col-12">
+                        <button type="button" class="btn btn-sm btn-danger float-left" data-dismiss="modal"><i class="fas fa-window-close"></i></button>
+                        <button type="button" class="btn btn-sm btn-success float-right enviaCategoria"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

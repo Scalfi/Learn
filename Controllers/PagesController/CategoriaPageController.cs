@@ -2,86 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Learn.Models.FrontEnd;
+using Learn.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Learn.Controllers.PagesController
 {
+    [Route("categoria")]
+
     public class CategoriaPageController : Controller
     {
-        // GET: CategoriaPageController
-        public ActionResult Index()
+        private readonly CategoriaRepository _categoriaRepository;
+
+        public CategoriaPageController(CategoriaRepository categoriaRepository)
         {
-            return View();
+            _categoriaRepository = categoriaRepository;
         }
 
-        // GET: CategoriaPageController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var produtos = await _categoriaRepository.PegaCategoriasAsync();
+            return View(produtos);
         }
 
-        // GET: CategoriaPageController/Create
-        public ActionResult Create()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Modal(int id)
         {
-            return View();
-        }
+            var model = new FrontModalProdutoCategoria();
+            model.Url = "/api/categoria";
 
-        // POST: CategoriaPageController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            if (id > 0)
             {
-                return RedirectToAction(nameof(Index));
+                model.Categoria = await _categoriaRepository.PegaCategoriaAsync(id);
+                model.Url = model.Url + "/" + model.Produto.ProdutoId;
+                model.Method = "PUT";
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: CategoriaPageController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: CategoriaPageController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CategoriaPageController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CategoriaPageController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View(model);
         }
     }
 }

@@ -20,9 +20,18 @@ namespace Learn.Repositories
         public async Task<Categoria> PegaCategoriaAsync(int id)
         {
             return await _db.Categorias
+                        .Where(c => c.CategoriaId.Equals(id))
+                        .FirstOrDefaultAsync();
+        }
+
+        public async Task<Categoria> PegaCategoriaComProdutoAsync(int id)
+        {
+            return await _db.Categorias
+                        .Include(c => c.Produtos)
                         .Where(p => p.CategoriaId.Equals(id))
                         .FirstOrDefaultAsync();
         }
+
 
         public async Task<List<Categoria>> PegaCategoriasAsync()
         {
@@ -61,7 +70,6 @@ namespace Learn.Repositories
 
             try
             {
-                await _db.AddAsync(Categoria);
                 await _db.SaveChangesAsync();
                 return Categoria;
             }

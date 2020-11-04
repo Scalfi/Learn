@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Learn.Controllers.APIsController
 {
-    [Route("api/[controller]")]
+    [Route("api/categoria")]
     [ApiController]
     public class APICategoriaController : BaseController
     {
@@ -38,7 +38,7 @@ namespace Learn.Controllers.APIsController
 
         // POST api/<APICategoriaController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Categoria Categoria)
+        public async Task<IActionResult> Post([FromForm] Categoria Categoria)
         {
 
             if (ModelState.IsValid)
@@ -56,7 +56,7 @@ namespace Learn.Controllers.APIsController
 
         // PUT api/<APICategoriaController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Categoria autualizarCategoria)
+        public async Task<IActionResult> Put(int id, [FromForm] Categoria autualizarCategoria)
         {
             if (ModelState.IsValid)
             {
@@ -81,12 +81,17 @@ namespace Learn.Controllers.APIsController
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var Categoria = await _CategoriaRepository.PegaCategoriaAsync(id);
+            var categoria = await _CategoriaRepository.PegaCategoriaAsync(id);
 
-            if (Categoria == null)
+            var existeCategoriaProduto = await _CategoriaRepository.PegaCategoriaComProdutoAsync(id);
+
+            if (categoria == null)
                 return BadRequest($"Categoria {id} não encontrado para ser deletada");
 
-            var sucesso = await _CategoriaRepository.DeletaCategoriaAsync(Categoria);
+            if (existeCategoriaProduto.Produtos.Count() >= 1)
+                return BadRequest($"Categoria tem relação com um produto! Não pode ser deletada!");
+
+            var sucesso = await _CategoriaRepository.DeletaCategoriaAsync(categoria);
 
             if (sucesso)
             {
