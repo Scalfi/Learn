@@ -9,7 +9,8 @@ namespace Learn.Models.FrontEnd
     {
         public Produto Produto { get; set; }
         public List<Categoria> Categorias { get; set; }
-        public string url { get; set; }
+        public string Url { get; set; } = "api/produto";
+        public string Method { get; set; } = "post";
 
     }
 }

@@ -66,7 +66,6 @@ namespace Learn.Repositories
 
             try
             {
-                await _db.AddAsync(produto);
                 await _db.SaveChangesAsync();
                 return produto;
             }

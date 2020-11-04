@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿@model List<Produto>
+
+@{
 }
 
 <div class="card">
@@ -19,16 +20,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center" >Donna Snider</td>
-                    <td class="text-center" >Customer Support</td>
-                    <td class="text-center" >New York</td>
-                    <td class="text-center" >27</td>
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-warning mr-2"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-sm btn-danger "><i class="fas fa-trash"></i></button>
-                    </td>
-                </tr>
+                @foreach (var produto in Model)
+                {
+                    <tr>
+
+                        <td class="text-center">@produto.Nome</td>
+                        <td class="text-center">R$@produto.Valor</td>
+                        <td class="text-center">@(produto.Categoria?.Nome ?? "Sem categoria")</td>
+                        <td class="text-center">@produto.Marca</td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-warning mr-2 editar" data-id="@produto.ProdutoId">  <i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm btn-danger remover" data-id="@produto.ProdutoId"><i class="fas fa-trash"></i></button>
+                        </td>
+
+                    </tr>
+                }
+
             </tbody>
             <tfoot>
                 <tr>

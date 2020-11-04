@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql.TypeHandlers.NumericHandlers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -29,9 +30,8 @@ namespace Learn.Models
         public string Descricao { get; set; }
 
         [Required]
-        [Range(0, 999.99)]
         [Column("Valor")]
-        public decimal Valor { get; set; }
+        public string Valor { get; set; }
         
         [MaxLength(50)]
         [DefaultValue("")]

@@ -21,19 +21,23 @@ namespace Learn.Controllers.PagesController
             _categoriaRepository = categoriaRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var produtos = await _produtoRepository.PegaProdutosAsync();
+            return View(produtos);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Modal(int id)
         {
-             var model = new FrontModalProdutoCategoria();
+            var model = new FrontModalProdutoCategoria();
+            
 
             if (id > 0)
             {
                 model.Produto = await _produtoRepository.PegaProdutoAsync(id);
+                model.Url = model.Url + "/" + model.Produto.ProdutoId;
+                model.Method = "PUT";
             }
 
             model.Categorias = await  _categoriaRepository.PegaCategoriasAsync();

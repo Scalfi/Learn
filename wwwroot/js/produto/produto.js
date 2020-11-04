@@ -7,8 +7,14 @@
 
 
     $("#criaProduto").click(function () {
+        chamaModal(0);
+    });
+    $(".editar").click(function () {
+        chamaModal($(this).data('id'));
+    });
+    function chamaModal(id) {
         $.ajax({
-            url: "/Produto/0",
+            url: "/Produto/"+id,
             method: "GET",
             dataType: "html"
         }).done(function (data) {
@@ -22,7 +28,7 @@
             console.log(error)
             alert("Data Saved: " + error);
         })
-    });
+    }
 
     function submitProduto() {
 
@@ -30,8 +36,8 @@
             $('body').LoadingOverlay("show");
 
             $.ajax({
-                url: "/api/produto",
-                method: "post",
+                url: $("#formProduto").attr('action'),
+                method: $("#formProduto").attr('method'),
                 dataType: "json",
                 data: $("#formProduto").serialize()
             }).done(function (data) {
@@ -40,10 +46,12 @@
                     text: "Adicionado com sucesso!",
                     icon: "success",
                     button: "Ok!",
+                }).then((data) => {
+                    location.reload();
                 });
             }).fail(function (error) {
                 swal({
-                    title: "Não foi possivel adicionar o produto",
+                    title: "Ocorreu Um erro interno",
                     text: error.errors,
                     icon: "error",
                     button: "Ok!",
