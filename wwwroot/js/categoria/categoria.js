@@ -39,7 +39,7 @@
                 }).fail(function (error) {
                     swal({
                         title: "Ocorreu um erro interno, Por favor tente novamente",
-                        text: error.errors,
+                        text: error,
                         icon: "error",
                         button: "Ok!",
                     });
@@ -60,8 +60,12 @@
             submitcategoria();
 
         }).fail(function (error) {
-            console.log(error)
-            alert("Data Saved: " + error);
+            swal({
+                title: "Ocorreu um erro, Por favor tente novamente",
+                text: error,
+                icon: "error",
+                button: "Ok!",
+            });
         })
     }
 
@@ -86,8 +90,8 @@
                 });
             }).fail(function (error) {
                 swal({
-                    title: "Ocorreu um erro interno, Por favor tente novamente",
-                    text: error.errors,
+                    title: "Ocorreu um error, Por favor tente novamente",
+                    text: error,
                     icon: "error",
                     button: "Ok!",
                 });
