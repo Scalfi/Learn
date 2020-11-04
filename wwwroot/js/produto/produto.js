@@ -32,7 +32,12 @@
                 dataType: "json",
                 data: $("#formProduto").serialize()
             }).done(function (data) {
-
+                swal({
+                    title: "Produto "+ data.Nome + "!" ,
+                    text: "Adicionado com sucesso!",
+                    icon: "success",
+                    button: "Ok!",
+                });
             }).fail(function (error) {
                 console.log(error)
                 alert("Data Saved: " + error);
