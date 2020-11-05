@@ -21,7 +21,6 @@
             icon: "warning",
             buttons: true,
         }).then((botao) => {
-            console.log(botao)
             if (botao) {
                 $.ajax({
                     url: "/api/categoria/" + $(this).data('id'),
@@ -39,7 +38,7 @@
                 }).fail(function (error) {
                     swal({
                         title: "Ocorreu um erro interno, Por favor tente novamente",
-                        text: error,
+                        text: error.responseText,
                         icon: "error",
                         button: "Ok!",
                     });
@@ -91,7 +90,7 @@
             }).fail(function (error) {
                 swal({
                     title: "Ocorreu um error, Por favor tente novamente",
-                    text: error,
+                    text: error.responseText,
                     icon: "error",
                     button: "Ok!",
                 });

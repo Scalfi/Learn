@@ -33,7 +33,8 @@
                                 <option value="">Escolha.</option>
                                 @foreach (var categoria in Model.Categorias)
                                 {
-                                    <option value="@categoria.CategoriaId" selected="@(categoria.CategoriaId.Equals(Model.Produto.CategoriaId) ?  "selected" : "" )" >@categoria.Nome</option>
+                                    
+                                    <option value="@categoria.CategoriaId"  selected='@(categoria.CategoriaId.Equals(Model.Produto?.CategoriaId) ?   true : false)'>@categoria.Nome</option>
 
                                 }
                             </select>
