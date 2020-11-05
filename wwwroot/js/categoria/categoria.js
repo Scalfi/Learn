@@ -61,7 +61,6 @@
         }).fail(function (error) {
             swal({
                 title: "Ocorreu um erro, Por favor tente novamente",
-                text: error,
                 icon: "error",
                 button: "Ok!",
             });
@@ -90,7 +89,6 @@
             }).fail(function (error) {
                 swal({
                     title: "Ocorreu um error, Por favor tente novamente",
-                    text: error.responseText,
                     icon: "error",
                     button: "Ok!",
                 });
